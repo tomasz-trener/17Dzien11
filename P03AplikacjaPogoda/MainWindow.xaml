@@ -21,14 +21,14 @@
 
         <StackPanel  Grid.Row="0" Grid.Column="0">
             <StackPanel Orientation="Horizontal" >
-                <Button Margin="10 0 0 0" x:Name="btnWczytajPogode" Click="btnWczytajPogode_Click" Height="50" Content="Wczytaj Async 1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button Margin="10 0 0 0" x:Name="btnWczytajPogode2" Click="btnWczytajPogode2_Click" Height="50" Content="Wczytaj Async 2 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button Margin="10 0 0 0" x:Name="btnWczytajPogode3" Click="btnWczytajPogode3_Click" Height="50" Content="Wczytaj Async 3 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button  Width="100" Margin="10 0 0 0" x:Name="btnWczytajPogode" Click="btnWczytajPogode_Click" Height="50" Content="Wczytaj Async 1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button  Width="100" Margin="10 0 0 0" x:Name="btnWczytajPogode2" Click="btnWczytajPogode2_Click" Height="50" Content="Wczytaj Async 2 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button  Width="100" Margin="10 0 0 0" x:Name="btnWczytajPogode3" Click="btnWczytajPogode3_Click" Height="50" Content="Wczytaj Async 3 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" >
-                <Button Margin="10 0 0 0" x:Name="btnWczytajPogode4" Click="btnWczytajPogode4_Click" Height="50" Content="Wczytaj Async 4 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button Margin="10 0 0 0" x:Name="btnWczytajPogode5" Click="btnWczytajPogode5_Click" Height="50" Content="Wczytaj Async 5 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button Margin="10 0 0 0" x:Name="btnWczytajPogode6" Click="btnWczytajPogode6_Click" Height="50" Content="Wczytaj Async 6 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button  Width="100" Margin="10 0 0 0" x:Name="btnWczytajPogode4" Click="btnWczytajPogode4_Click" Height="50" Content="Wczytaj Async 4 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button  Width="100" Margin="10 0 0 0" x:Name="btnWczytajPogode5" Click="btnWczytajPogode5_Click" Height="50" Content="Wczytaj Async 5 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button  Width="100" Margin="10 0 0 0" x:Name="btnWczytajPogode6" Click="btnWczytajPogode6_Click" Height="50" Content="Wczytaj Async 6 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
         </StackPanel>
         
@@ -41,5 +41,7 @@
         
         <Label x:Name="lblKomunikaty"  Grid.Row="1" Grid.Column="0"  Content="" />
         <ListBox x:Name="lbWynik" Grid.Row="1" Grid.Column="1" ></ListBox>
+
+        <ProgressBar x:Name="pbPostep" Grid.Row="2" Grid.Column="1"></ProgressBar>
     </Grid>
 </Window>

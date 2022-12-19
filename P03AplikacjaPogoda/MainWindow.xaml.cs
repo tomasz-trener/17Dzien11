@@ -135,6 +135,8 @@ namespace P03AplikacjaPogoda
             string[] miasta = miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             PogodaManager mp = new PogodaManager();
 
+            pbPostep.Maximum = miasta.Length;
+            pbPostep.Value = 0;
             lblKomunikaty.Content = "";
             lbWynik.Items.Clear();
 
@@ -151,6 +153,7 @@ namespace P03AplikacjaPogoda
                 t.GetAwaiter().OnCompleted(() =>
                 {
                     lbWynik.Items.Add($"temperatura w mieście {m} wynosi {t.Result}");
+                    pbPostep.Value += 1;
                 });
             }
 
@@ -162,8 +165,14 @@ namespace P03AplikacjaPogoda
             lblKomunikaty.Content = "";
             lbWynik.Items.Clear();
 
+           
+
             string miasto = txtMiasto.Text;
             string[] miasta = miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            pbPostep.Maximum = miasta.Length;
+            pbPostep.Value = 0;
+
             PogodaManager mp = new PogodaManager();
             
             foreach (var m in miasta)
@@ -177,6 +186,7 @@ namespace P03AplikacjaPogoda
                 });
                 
                 lbWynik.Items.Add($"temperatura w mieście {m} wynosi {t}");
+                pbPostep.Value += 1;
             }
 
 
