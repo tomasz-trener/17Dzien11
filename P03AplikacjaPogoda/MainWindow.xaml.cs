@@ -1,4 +1,5 @@
-﻿using System;
+﻿using P03AplikacjaPogoda.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,11 @@ namespace P03AplikacjaPogoda
         {
             string miasto = txtMiasto.Text;
 
+            PogodaManager mp = new PogodaManager();
+            int temp =mp.PodajTemp(miasto);
 
+
+            lbWynik.Items.Add(temp);
         }
 
          
