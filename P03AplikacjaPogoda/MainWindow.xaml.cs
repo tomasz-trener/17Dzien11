@@ -123,7 +123,7 @@ namespace P03AplikacjaPogoda
             }
             await Task.WhenAll(zadania);
 
-            foreach (Task<dynamic> t in zadania)
+            foreach (Task<(string NazwaMiasta, int Temp)> t in zadania)
             {
                 lblKomunikaty.Content += $"Procesuję miasto: {t.Result.NazwaMiasta} \n";
                 lbWynik.Items.Add($"temperatura w mieście {t.Result.NazwaMiasta} wynosi {t.Result.Temp}");

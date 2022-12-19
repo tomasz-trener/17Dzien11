@@ -16,8 +16,6 @@ namespace P04AplikacjaPogodaClientAPI.Tools
         private const string autocomplete_endpoint = "locations/v1/cities/autocomplete?apikey={0}&q={1}&language={2}";
         private const string api_key = "";
 
-
-
         public async Task<City[]> GetLocations(string locationName)
         {
             string url = base_url + "/" + string.Format(autocomplete_endpoint,api_key, locationName, "pl");

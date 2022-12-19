@@ -31,9 +31,9 @@
 
         <StackPanel  Grid.Row="0" Grid.Column="0">
             <StackPanel Orientation="Horizontal" >
-                <Button   x:Name="btnWczytajPogode"  Click="btnWczytajPogode_Click" Height="50" Content="Wczytaj Async 1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button  x:Name="btnWczytajPogode"  Click="btnWczytajPogode_Click" Height="50" Content="Wczytaj Async 1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Button  x:Name="btnWczytajPogode2" Click="btnWczytajPogode2_Click" Height="50" Content="Wczytaj Async 2 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button   x:Name="btnWczytajPogode3" Click="btnWczytajPogode3_Click" Height="50" Content="Wczytaj Async 3 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button  x:Name="btnWczytajPogode3" Click="btnWczytajPogode3_Click" Height="50" Content="Wczytaj Async 3 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" >
                 <Button x:Name="btnWczytajPogode4" Click="btnWczytajPogode4_Click" Height="50" Content="Wczytaj Async 4 " HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -44,7 +44,7 @@
         
        
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" >
-            <Label   Content="Podaj miasta, dla których chcesz uzyskać temperature"></Label>
+            <Label  Content="Podaj miasta, dla których chcesz uzyskać temperature"></Label>
             <TextBox AcceptsReturn="True" x:Name="txtMiasto" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         </StackPanel>
        
