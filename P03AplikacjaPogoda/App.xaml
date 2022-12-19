@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:P03AplikacjaPogoda"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <SolidColorBrush x:Key="PodstawowyKolor" Color="Red" ></SolidColorBrush>
+
+        <!--dotyczy kazdego przycisku, który będzie mial zaimplementowana klase "klasaPrzyciski"-->
+        <Style TargetType="{x:Type Control}" x:Key="klasaPrzyciski" >
+            <Setter Property="Background" Value="Green"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource klasaPrzyciski}">
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        
     </Application.Resources>
 </Application>

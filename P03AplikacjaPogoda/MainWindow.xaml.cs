@@ -106,17 +106,19 @@ namespace P03AplikacjaPogoda
         {
             string miasto = txtMiasto.Text;
             string[] miasta = miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            PogodaManager mp = new PogodaManager();
+           // PogodaManager mp = new PogodaManager();
 
             List<Task> zadania = new List<Task>();
 
             foreach (var m in miasta)
             {
-                var t = Task.Run<object>(() =>
-                {
-                    int temp = mp.PodajTemp(m);
-                    return new { NazwaMiasta = m, Temp = temp };
-                });
+                //var t = Task.Run<object>(() =>
+                //{
+                //    int temp = mp.PodajTemp(m);
+                //    return new { NazwaMiasta = m, Temp = temp };
+                //});
+                var t = Task.Run(() => PodajTemp2(m));
+
                 zadania.Add(t);
             }
             await Task.WhenAll(zadania);
@@ -128,12 +130,19 @@ namespace P03AplikacjaPogoda
             }        
         }
 
+        private async Task<(string NazwaMiasta, int Temp)> PodajTemp2(string miasto)
+        {
+            PogodaManager mp = new PogodaManager();
+            var temp= mp.PodajTemp(miasto);
+            return await Task.FromResult((miasto, temp));
+        }
+
         // przetwarzanie asynchroncze zwroc wynik kiedy gotowy 
         private void btnWczytajPogode5_Click(object sender, RoutedEventArgs e)
         {
             string miasto = txtMiasto.Text;
             string[] miasta = miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            PogodaManager mp = new PogodaManager();
+            //PogodaManager mp = new PogodaManager();
 
             pbPostep.Maximum = miasta.Length;
             pbPostep.Value = 0;
@@ -142,11 +151,12 @@ namespace P03AplikacjaPogoda
 
             foreach (var m in miasta)
             {
-                var t = Task.Run<int>(() =>
-                {
-                    int temp = mp.PodajTemp(m);
-                    return temp;
-                });
+                //var t = Task.Run<int>(() =>
+                //{
+                //    int temp = mp.PodajTemp(m);
+                //    return temp;
+                //});
+                var t = Task.Run(() => PodajTemperature(m));
 
                 lblKomunikaty.Content += $"Procesuję miasto: {m} \n";
 
@@ -157,6 +167,14 @@ namespace P03AplikacjaPogoda
                 });
             }
 
+        }
+
+        private async Task<int> PodajTemperature(string miasto)
+        {
+            PogodaManager mp = new PogodaManager();
+            int wynik=  mp.PodajTemp(miasto);
+
+            return await Task.FromResult(wynik);
         }
 
         // przetwarzanie asynchroniczne jeden po drugim 
