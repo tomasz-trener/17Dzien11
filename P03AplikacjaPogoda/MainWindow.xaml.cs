@@ -24,5 +24,14 @@ namespace P03AplikacjaPogoda
         {
             InitializeComponent();
         }
+
+        private void btnWczytajPogode_Click(object sender, RoutedEventArgs e)
+        {
+            string miasto = txtMiasto.Text;
+
+
+        }
+
+         
     }
 }

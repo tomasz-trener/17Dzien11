@@ -8,5 +8,21 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+
+        
+        <Button x:Name="btnWczytajPogode" Click="btnWczytajPogode_Click" Grid.Row="0" Grid.Column="0" Height="50" Content="Wczytaj pogode" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtMiasto" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label  Grid.Row="1" Grid.Column="0"  Content="Pole tekstowe" />
+        <ListBox x:Name="lbWynik" Grid.Row="1" Grid.Column="1" ></ListBox>
     </Grid>
 </Window>
