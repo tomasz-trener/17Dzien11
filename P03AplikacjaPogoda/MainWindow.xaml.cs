@@ -35,16 +35,12 @@ namespace P03AplikacjaPogoda
 
             PogodaManager mp = new PogodaManager();
 
-
             foreach (var m in miasta)
             {
                 lblKomunikaty.Content += $"Procesuję miasto: {m} \n";
                 int temp = mp.PodajTemp(m);
                 lbWynik.Items.Add($"temperatura w mieście {m} wynosi {temp}");
-            }
-
-
-           
+            }           
         }
 
          
