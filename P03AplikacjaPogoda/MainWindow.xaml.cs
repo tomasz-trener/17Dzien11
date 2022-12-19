@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,11 +31,20 @@ namespace P03AplikacjaPogoda
         {
             string miasto = txtMiasto.Text;
 
+            string[] miasta= miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
             PogodaManager mp = new PogodaManager();
-            int temp =mp.PodajTemp(miasto);
 
 
-            lbWynik.Items.Add(temp);
+            foreach (var m in miasta)
+            {
+                lblKomunikaty.Content += $"Procesuję miasto: {m} \n";
+                int temp = mp.PodajTemp(m);
+                lbWynik.Items.Add($"temperatura w mieście {m} wynosi {temp}");
+            }
+
+
+           
         }
 
          

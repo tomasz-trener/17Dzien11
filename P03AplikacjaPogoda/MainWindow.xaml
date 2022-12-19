@@ -21,8 +21,14 @@
 
         
         <Button x:Name="btnWczytajPogode" Click="btnWczytajPogode_Click" Grid.Row="0" Grid.Column="0" Height="50" Content="Wczytaj pogode" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtMiasto" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label  Grid.Row="1" Grid.Column="0"  Content="Pole tekstowe" />
+
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" >
+            <Label   Content="Podaj miasta, dla których chcesz uzyskać temperature"></Label>
+            <TextBox AcceptsReturn="True" x:Name="txtMiasto" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        </StackPanel>
+       
+        
+        <Label x:Name="lblKomunikaty"  Grid.Row="1" Grid.Column="0"  Content="" />
         <ListBox x:Name="lbWynik" Grid.Row="1" Grid.Column="1" ></ListBox>
     </Grid>
 </Window>
