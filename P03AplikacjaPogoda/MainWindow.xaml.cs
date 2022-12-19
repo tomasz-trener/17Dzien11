@@ -27,7 +27,8 @@ namespace P03AplikacjaPogoda
             InitializeComponent();
         }
 
-        private void btnWczytajPogode_Click(object sender, RoutedEventArgs e)
+        // Scenariusz 1 wywołanie asynchroniczne z czekaniem 
+        private async void btnWczytajPogode_Click(object sender, RoutedEventArgs e)
         {
             string miasto = txtMiasto.Text;
 
@@ -35,14 +36,151 @@ namespace P03AplikacjaPogoda
 
             PogodaManager mp = new PogodaManager();
 
+            var t= await Task.Run<int>(() =>
+            {
+                int temp = mp.PodajTemp(miasta[0]);
+                return temp;
+            });
+
+            // to ponizej wynikona sie dopiero wtedy gdy metoda anononimowa zdefniowana 
+            // powyzej wykona sie w całości. odpowiada za to słowo await 
+            
+            lblKomunikaty.Content += $"Procesuję miasto: {miasta[0]} \n";
+            lbWynik.Items.Add($"temperatura w mieście {miasta[0]} wynosi {t}");
+
+            //foreach (var m in miasta)
+            //{
+            //    lblKomunikaty.Content += $"Procesuję miasto: {m} \n";
+            //    int temp = mp.PodajTemp(m);
+            //    lbWynik.Items.Add($"temperatura w mieście {m} wynosi {temp}");
+            //}           
+        }
+
+        // Scenariusz 2 wywołanie asynchroniczne bez czekania 
+        private async void btnWczytajPogode2_Click(object sender, RoutedEventArgs e)
+        {
+            string miasto = txtMiasto.Text;
+            string[] miasta = miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            PogodaManager mp = new PogodaManager();
+
+            var t = Task.Run<int>(() =>
+            {
+                int temp = mp.PodajTemp(miasta[0]);
+                return temp;
+            });
+
+            lblKomunikaty.Content += $"Procesuję miasto: {miasta[0]} \n";
+
+            t.GetAwaiter().OnCompleted(() =>
+            {
+                lbWynik.Items.Add($"temperatura w mieście {miasta[0]} wynosi {t.Result}");
+            });
+
+            await Task.CompletedTask;
+        }
+
+        // Scenariusz 3 wywołanie asynchroniczne wiele miasta jedeno pod drugim 
+        private async void btnWczytajPogode3_Click(object sender, RoutedEventArgs e)
+        {
+            string miasto = txtMiasto.Text;
+            string[] miasta = miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            PogodaManager mp = new PogodaManager();
+
+            foreach (var m in miasta)
+            {
+                var t = await Task.Run<int>(() =>
+                {
+                    int temp = mp.PodajTemp(m);
+                    return temp;
+                });
+
+                lblKomunikaty.Content += $"Procesuję miasto: {m} \n";
+                lbWynik.Items.Add($"temperatura w mieście {m} wynosi {t}");
+
+            }
+        }
+
+        // Scenariusz wywołanie asynchroncze (wszystkie miasta wywoulja się niezaleznie i równolegle) ale czekam az wszystkie
+        // zadania się wykonaja i dopiero po wykonaniu wszystkich zadan zwracam wynik 
+        private async void btnWczytajPogode4_Click(object sender, RoutedEventArgs e)
+        {
+            string miasto = txtMiasto.Text;
+            string[] miasta = miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            PogodaManager mp = new PogodaManager();
+
+            List<Task> zadania = new List<Task>();
+
+            foreach (var m in miasta)
+            {
+                var t = Task.Run<object>(() =>
+                {
+                    int temp = mp.PodajTemp(m);
+                    return new { NazwaMiasta = m, Temp = temp };
+                });
+                zadania.Add(t);
+            }
+            await Task.WhenAll(zadania);
+
+            foreach (Task<dynamic> t in zadania)
+            {
+                lblKomunikaty.Content += $"Procesuję miasto: {t.Result.NazwaMiasta} \n";
+                lbWynik.Items.Add($"temperatura w mieście {t.Result.NazwaMiasta} wynosi {t.Result.Temp}");
+            }        
+        }
+
+        // przetwarzanie asynchroncze zwroc wynik kiedy gotowy 
+        private void btnWczytajPogode5_Click(object sender, RoutedEventArgs e)
+        {
+            string miasto = txtMiasto.Text;
+            string[] miasta = miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            PogodaManager mp = new PogodaManager();
+
+            lblKomunikaty.Content = "";
+            lbWynik.Items.Clear();
+
+            foreach (var m in miasta)
+            {
+                var t = Task.Run<int>(() =>
+                {
+                    int temp = mp.PodajTemp(m);
+                    return temp;
+                });
+
+                lblKomunikaty.Content += $"Procesuję miasto: {m} \n";
+
+                t.GetAwaiter().OnCompleted(() =>
+                {
+                    lbWynik.Items.Add($"temperatura w mieście {m} wynosi {t.Result}");
+                });
+            }
+
+        }
+
+        // przetwarzanie asynchroniczne jeden po drugim 
+        private async void btnWczytajPogode6_Click(object sender, RoutedEventArgs e)
+        {
+            lblKomunikaty.Content = "";
+            lbWynik.Items.Clear();
+
+            string miasto = txtMiasto.Text;
+            string[] miasta = miasto.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            PogodaManager mp = new PogodaManager();
+            
             foreach (var m in miasta)
             {
                 lblKomunikaty.Content += $"Procesuję miasto: {m} \n";
-                int temp = mp.PodajTemp(m);
-                lbWynik.Items.Add($"temperatura w mieście {m} wynosi {temp}");
-            }           
-        }
 
-         
+                var t = await Task.Run<int>(() =>
+                {
+                    int temp = mp.PodajTemp(m);
+                    return temp ;
+                });
+                
+                lbWynik.Items.Add($"temperatura w mieście {m} wynosi {t}");
+            }
+
+
+
+        }
     }
 }
